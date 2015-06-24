@@ -1,0 +1,68 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                template="templates/template.xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+
+    <ui:define name="top">
+        <h:outputText class="main" id="witajka" value="#{userBean.przywitanie}" />
+
+    </ui:define>
+
+
+    <ui:define name="content">
+        <h:outputText id="addmain" value="#{userBean.dodajpost()}" />   
+        <h:panelGroup layout="block" id="id1c" style="position:relative">  
+            <h:panelGrid columns="1">
+                <h:outputText class="text" style="font-size:40px" id="id1" value="Post"></h:outputText>
+                <h:outputText style="font-size:20px" id="id1_1" value="PodPost"></h:outputText>
+                <h:outputText style="font-size:20px" id="id1_2" value="PodPost2"></h:outputText>
+                <h:outputText style="font-size:10px" id="id1_1_1" value="PodpodPost"></h:outputText>
+                <h:outputText style="font-size:10px" id="id1_1_2" value="PodpodPost2"></h:outputText>
+                <h:outputText style="font-size:5px" id="id1_1_1_1" value="PodpodpodPost"></h:outputText>
+                <h:outputText style="font-size:5px" id="id1_1_1_2" value="PodpodpodPost2"></h:outputText>
+                <h:outputText style="font-size:0px" id="id1_1_1_1_1" value="PodpodpodpodPost"></h:outputText>
+                <h:outputText style="font-size:0px" id="id1_1_1_1_2" value="PodpodpodpodPost2"></h:outputText>
+                <h:outputText style="font-size:40px" id="id2" value="Post2"></h:outputText>
+                <h:outputText style="font-size:20px" id="id2_1" value="PodPost2"></h:outputText>
+                <h:outputText style="font-size:20px" id="id2_2" value="PodPost2-2"></h:outputText>
+                <h:outputText style="font-size:10px" id="id2_1_1" value="PodpodPost2"></h:outputText>
+                <h:outputText style="font-size:10px" id="id2_1_2" value="PodpodPost2-2"></h:outputText>
+            </h:panelGrid>
+        </h:panelGroup>
+
+
+    </ui:define>
+
+    <ui:define name="foot">       
+        © Copyright 2015. All Rights Reserved.
+    </ui:define>
+
+    <ui:define name="another"> 
+        <h:form id="a">
+            <h:commandButton style="display:block; background-color: burlywood; padding: 10px; position:absolute;left:90%;top:30px;" 
+                             id="logout" value="#{userBean.zalogowany ? 'Logout' : 'SignIn'}" action="#{userBean.loginacja()}">
+                <f:ajax render=":witajka: logout :addmain:" />
+            </h:commandButton>
+        </h:form>
+
+
+        <h:panelGroup id="window"  class="window">
+            <h:form id="form" rendered="#{!userBean.zalogowany}">
+                <h:panelGrid columns="1">
+                    <h:outputText class="error" value="#{userBean.komunikat}"/>
+                    <h:outputLabel>Nick:</h:outputLabel>
+                    <h:inputText value="#{userBean.name}" />
+                    <h:outputLabel>Hasło:</h:outputLabel>
+                    <h:inputSecret value="#{userBean.password}" />
+                    <h:commandButton value="Join Now" action="#{userBean.logowanie()}">
+                        <f:ajax render=":witajka: :a:logout :addmain:  @form" execute="@form" />
+                    </h:commandButton>
+                </h:panelGrid>
+            </h:form>  
+        </h:panelGroup> 
+    </ui:define>
+
+</ui:composition>
